@@ -7,14 +7,11 @@
             {{ heroe().nombre }}
         </div>
     </div>
-    <div class="dero-powerstats">
-        <span>Inteligencia: {{ heroe().poderes.inteligencia }}</span>
-        <button [disabled]="heroe().poderes.inteligencia === 100" (click)="incrementaPoder('inteligencia')">+</button>
-        <button [disabled]="heroe().poderes.inteligencia === 0" (click)="decrementaPoder('inteligencia')">-</button>
-    </div>
-    <div class="dero-powerstats">
-        <span>Velocidad: {{ heroe().poderes.velocidad }}</span>
-        <button [disabled]="heroe().poderes.velocidad === 100" (click)="incrementaPoder('velocidad')">+</button>
-        <button [disabled]="heroe().poderes.velocidad === 0" (click)="decrementaPoder('velocidad')">-</button>
-    </div>
+     @for (poder of heroe().poderes | keyvalue; track poder.key) {
+        <div class="hero-powerstats">
+            <span>{{ poder.key | titlecase }}: {{ poder.value }}</span>
+            <button [disabled]="poder.value === 100" (click)="incrementaPoder(poder.key)">+</button>
+            <button [disabled]="poder.value === 0" (click)="decrementaPoder(poder.key)">-</button>
+        </div>
+    }
 </div>
