@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { Heroe, Poder } from '../../compartido/interfaces/heroe.interface';
 
 @Component({
@@ -8,28 +8,19 @@ import { Heroe, Poder } from '../../compartido/interfaces/heroe.interface';
   styleUrl: './item-heroe.css',
 })
 export class ItemHeroe {
-  heroe: Heroe = {
-    id: 1,
-    nombre: 'Superman',
-    poderes: {
-      velocidad: 100,
-      inteligencia: 90
-    },
-    imagen: 'superman.jpg',
-    bando: 'bueno'
-  }
+  heroe = input.required<Heroe>();
 
-  esVillano = this.heroe.bando === 'malo';
+  esVillano = computed(() => this.heroe().bando === 'malo');
 
   decrementaPoder (poder: Poder): void {
-    if (this.heroe.poderes[poder] > 0) {
-      this.heroe.poderes[poder]--;
+    if (this.heroe().poderes[poder] > 0) {
+      this.heroe().poderes[poder]--;
     }
   }
 
   incrementaPoder (poder: Poder): void {
-    if (this.heroe.poderes[poder] < 100) {
-      this.heroe.poderes[poder]++;
+    if (this.heroe().poderes[poder] < 100) {
+      this.heroe().poderes[poder]++;
     }
   }
 }
