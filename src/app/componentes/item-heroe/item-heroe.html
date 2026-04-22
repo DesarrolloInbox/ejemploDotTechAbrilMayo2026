@@ -1,0 +1,20 @@
+<div [class]="esVillano ? 'hero-item hero-villain' : 'hero-item'">
+    <div class="image">
+        <img [src]="heroe.imagen" alt="heroe.nombre">
+    </div>
+    <div class="details">
+        <div class="hero-name">
+            {{ heroe.nombre }}
+        </div>
+    </div>
+    <div class="dero-powerstats">
+        <span>Inteligencia: {{ heroe.poderes.inteligencia }}</span>
+        <button [disabled]="heroe.poderes.inteligencia === 100" (click)="incrementaPoder('inteligencia')">+</button>
+        <button [disabled]="heroe.poderes.inteligencia === 0" (click)="decrementaPoder('inteligencia')">-</button>
+    </div>
+    <div class="dero-powerstats">
+        <span>Velocidad: {{ heroe.poderes.velocidad }}</span>
+        <button [disabled]="heroe.poderes.velocidad === 100" (click)="incrementaPoder('velocidad')">+</button>
+        <button [disabled]="heroe.poderes.velocidad === 0" (click)="decrementaPoder('velocidad')">-</button>
+    </div>
+</div>
