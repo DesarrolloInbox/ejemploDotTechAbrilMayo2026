@@ -1,5 +1,5 @@
 <div>
-    <app-item-heroe [heroe]="heroes[0]"></app-item-heroe>
-    <app-item-heroe [heroe]="heroes[1]"></app-item-heroe>
-    <app-item-heroe [heroe]="heroes[2]"></app-item-heroe>
+    <app-item-heroe [heroe]="heroes[0]" (cambioPoder)="onCambioPoder($event)"></app-item-heroe>
+    <app-item-heroe [heroe]="heroes[1]" (cambioPoder)="onCambioPoder($event)"></app-item-heroe>
+    <app-item-heroe [heroe]="heroes[2]" (cambioPoder)="onCambioPoder($event)"></app-item-heroe>
 </div>

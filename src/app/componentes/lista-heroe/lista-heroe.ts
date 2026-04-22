@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Heroe } from '../../compartido/interfaces/heroe.interface';
 import { ItemHeroe } from "../item-heroe/item-heroe";
+import { HeroeCambioPoderes } from '../../compartido/interfaces/HeroeCambioPoderes';
 
 @Component({
   selector: 'app-lista-heroe',
@@ -41,4 +42,8 @@ export class ListaHeroe {
       bando: 'bueno'
     }
   ]
+
+  onCambioPoder({heroe, poder, valor}: HeroeCambioPoderes): void {
+    heroe.poderes[poder] += valor;
+  }
 }
