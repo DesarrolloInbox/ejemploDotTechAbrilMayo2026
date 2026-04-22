@@ -4,7 +4,7 @@ Angular 21 - Proyecto base
 
 ## Descripción
 
-Aplicación web básica generada con Angular CLI. Actualmente muestra una página de bienvenida con el componente `item-heroe` incorporado.
+Aplicación web de héroes/villanos desarrollada con Angular. Permite visualizar una lista de héroes con sus poderes y modificar sus atributos (inteligencia, velocidad, fuerza, etc.) mediante comunicación entre componentes.
 
 ## Tecnologías
 
@@ -18,19 +18,30 @@ Aplicación web básica generada con Angular CLI. Actualmente muestra una págin
 ```
 src/
 ├── app/
-│   ├── componentes/item-heroe/  # Componente de ejemplo
-│   ├── app.ts                   # Componente raíz
-│   ├── app.html                 # Template principal
-│   └── app.config.ts            # Configuración
-├── index.html                  # Entry point
-└── styles.css                  # Estilos globales
+│   ├── componentes/
+│   │   ├── item-heroe/    # Componente individual de héroe
+│   │   └── lista-heroe/  # Componente de lista de héroes
+│   ├── compartido/
+│   │   └── interfaces/  # Interfaces compartidas
+│   ├── app.ts           # Componente raíz
+│   ├── app.html         # Template principal
+│   └── app.config.ts    # Configuración
+├── index.html
+└── styles.css
 ```
 
 ## Comandos
 
 - `ng serve` - Servidor desarrollo (http://localhost:4200)
 - `ng build` - Build producción
+- `ng generate component` - Generar nuevo componente
 
 ## Componentes
 
-- **item-heroe**: Componente standalone en `src/app/componentes/item-heroe/`
+- **item-heroe**: Muestra información de un héroe con imagen, nombre y poderes. Permite incrementar/decrementar atributos mediante botones.
+- **lista-heroe**: Lista de héroes que usa el componente item-heroe para renderizar cada elemento.
+
+## Interfaces
+
+- **Heroe**: Define la estructura de un héroe (nombre, imagen, poderes)
+- **HeroeCambioPoderes**: Define los cambios de poderes entre componentes
