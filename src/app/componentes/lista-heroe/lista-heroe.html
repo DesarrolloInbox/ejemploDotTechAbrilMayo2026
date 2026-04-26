@@ -1,5 +1,5 @@
 <div>
-    @for (item of heroes; track $index) {
+    @for (item of heroes(); track $index) {
         <app-item-heroe [heroe]="item" (cambioPoder)="onCambioPoder($event)"></app-item-heroe>
     }@empty {
     <p>No hay heroes</p>
