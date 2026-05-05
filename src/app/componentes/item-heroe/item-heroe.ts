@@ -15,6 +15,22 @@ export class ItemHeroe {
 
   esVillano = computed(() => this.heroe().bando === 'malo');
 
+  getMainStat(): string {
+    const poderes = this.heroe().poderes;
+    if (poderes.inteligencia >= poderes.velocidad) {
+      return 'INT';
+    }
+    return 'SPD';
+  }
+
+  getStatLabel(key: string): string {
+    const labels: Record<string, string> = {
+      inteligencia: 'INT',
+      velocidad: 'SPD'
+    };
+    return labels[key] || key.toUpperCase();
+  }
+
   decrementaPoder (poder: Poder): void {
     this.cambioPoder.emit({heroe: this.heroe(), poder, valor: -1});
   }

@@ -1,48 +1,76 @@
-<div class="hero-form-container">
-    <h3>Agrega un nuevo héroe</h3>
+<div class="add-hero-form">
+    <button type="button" class="add-hero-btn" (click)="toggleForm()">
+        <span class="btn-icon">+</span>
+        <span class="btn-text">AGREGA UN NUEVO HÉROE</span>
+    </button>
+    {{ mensajeError}}
 
-    <form [formGroup]="heroeForm">
-        <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input type="text" formControlName="nombre" 
-                id="nombre" name="nombre" required
-                placeholder="Ingresa el nombre del héroe">
-        </div>
+    @if (formVisible()) {
+        <div class="hero-form-container">
+            <h3>Nuevo Héroe</h3>
+            <form [formGroup]="heroeForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" formControlName="nombre" 
+                        id="nombre" name="nombre" required
+                        placeholder="Nombre del héroe">
+                </div>
+                @if (this.heroeForm.get('nombre')?.dirty && this.heroeForm.get('nombre')?.invalid) {
+                    <div>
+                        @if (this.heroeForm.get('nombre')?.errors?.['required']) {
+                            <span class="error-message">El nombre es obligatorio.</span>
+                        }
+                        @if (this.heroeForm.get('nombre')?.errors?.['nombreProhibido']) {
+                            <span class="error-message">Este nombre no esta permitido.</span>
+                        }
+                    </div>
+                }
 
-        <div class="poderes-group" formGroupName="poderes">
-            <div class="form-group">
-                <label for="inteligencia">Inteligencia</label>
-                <input type="number" formControlName="inteligencia" 
-                    id="inteligencia" name="inteligencia" required
-                    min="0" max="100">
-            </div>
-            <div class="form-group">
-                <label for="velocidad">Velocidad</label>
-                <input type="number" formControlName="velocidad" 
-                    id="velocidad" name="velocidad" required
-                    min="0" max="100">
-            </div>
-        </div>
+                <div class="poderes-group" formGroupName="poderes">
+                    @for (poder of poderesArray; track poder) {
+                        <div class="form-group">
+                            <label [for]="poder">{{ poder | titlecase }}</label>
+                            <input type="number" [formControlName]="poder" 
+                                id="inteligencia" [name]="poder">
+                        </div>
+                        @if (this.heroeForm.get('poderes')?.get(poder)?.dirty && this.heroeForm.get('poderes')?.get(poder)?.invalid) {
+                            <div>
+                                @if (this.heroeForm.get('poderes')?.get(poder)?.getError('required')) {
+                                    <span class="error-message">{{ poder | titlecase }} es obligatorio.</span>
+                                }
+                                @if (this.heroeForm.get('poderes')?.get(poder)?.getError('min')) {
+                                    <span class="error-message">{{ poder |titlecase}} debe ser al menos 0.</span>
+                                }
+                                @if (this.heroeForm.get('poderes')?.get(poder)?.getError('max')) {
+                                    <span class="error-message">{{ poder |titlecase}} no puede ser mayor que 100  .</span>
+                                }
+                            </div>
+                        }
+                    }
+                 
+                </div>
 
-        <div class="form-group">
-            <label for="imagen">Imagen</label>
-            <select formControlName="imagen" id="imagen" name="imagen" required>
-                <option selected value="imagen1.jpg">Imagen 1</option>
-                <option value="imagen2.jpg">Imagen 2</option>
-                <option value="imagen3.jpg">Imagen 3</option>
-            </select>
-        </div>
+                <div class="form-group">
+                    <label for="imagen">Imagen</label>
+                    <select formControlName="imagen" id="imagen" name="imagen" required>
+                        <option selected value="imagen1.jpg">Imagen 1</option>
+                        <option value="imagen2.jpg">Imagen 2</option>
+                        <option value="imagen3.jpg">Imagen 3</option>
+                    </select>
+                </div>
 
-        <div class="form-group">
-            <label for="bando">Bando</label>
-            <select formControlName="bando" id="bando" name="bando" required>
-                <option selected value="bueno">Soy un Héroe</option>
-                <option value="malo">Soy un Villano</option>
-            </select>
-        </div>
+                <div class="form-group">
+                    <label for="bando">Bando</label>
+                    <select formControlName="bando" id="bando" name="bando" required>
+                        <option selected value="bueno">Soy un Héroe</option>
+                        <option value="malo">Soy un Villano</option>
+                    </select>
+                </div>
 
-        <div class="button-group">
-            <button type="button" (click)="agregarHeroe()" [disabled]="heroeForm.invalid">Crear</button>
+                <div class="button-group">
+                    <button type="button" (click)="agregarHeroe()" [disabled]="heroeForm.invalid">Crear</button>
+                </div>
+            </form>
         </div>
-    </form>
+    }
 </div>

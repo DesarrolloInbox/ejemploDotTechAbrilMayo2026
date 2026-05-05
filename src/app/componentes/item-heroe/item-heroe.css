@@ -1,41 +1,162 @@
 .hero-item {
-  background: #f5f5f5;
-  border: 2px solid #333;
-  border-radius: 8px;
-  padding: 16px;
-  max-width: 300px;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 0.75rem;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: var(--radius-lg);
+    box-shadow: inset 0 0 20px rgba(52, 211, 153, 0.05);
+    pointer-events: none;
+}
+
+.hero-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow), var(--shadow-glow);
+    border-color: rgba(52, 211, 153, 0.3);
 }
 
 .hero-item.hero-villain {
-  border-color: #d32f2f;
+    border-color: rgba(239, 68, 68, 0.4);
+}
+
+.hero-item.hero-villain::before {
+    box-shadow: inset 0 0 20px rgba(239, 68, 68, 0.05);
+}
+
+.hero-item.hero-villain:hover {
+    border-color: rgba(239, 68, 68, 0.6);
+    box-shadow: var(--shadow), 0 0 15px rgba(239, 68, 68, 0.2);
+}
+
+.hero-item.hero-villain .hero-name {
+    color: var(--color-danger);
+}
+
+.image {
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+    position: relative;
 }
 
 .image img {
-  width: 100%;
-  height: auto;
-  border-radius: 4px;
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(30%) contrast(1.1);
+    transition: filter 0.2s ease;
+}
+
+.hero-item:hover .image img {
+    filter: grayscale(0%) contrast(1);
+}
+
+.tactical-tag {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(11, 20, 28, 0.9);
+    color: var(--color-accent);
+    padding: 2px 8px;
+    border-radius: var(--radius);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--color-accent);
+}
+
+.hero-villain .tactical-tag {
+    color: var(--color-danger);
+    border-color: var(--color-danger);
 }
 
 .hero-name {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin: 8px 0;
-  color: #333;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0.25rem 0 0.5rem;
+    color: var(--color-success);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.dero-powerstats {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 8px 0;
+.hero-powerstats {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(45, 63, 80, 0.5);
 }
 
-.dero-powerstats span {
-  flex: 1;
-  color: #666;
+.hero-powerstats:last-child {
+    border-bottom: none;
 }
 
-.dero-powerstats button {
-  padding: 4px 12px;
-  cursor: pointer;
+.hero-powerstats .stat-label {
+    color: var(--color-text-muted);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+}
+
+.hero-powerstats .stat-value {
+    color: var(--color-text);
+    font-size: 1rem;
+    font-weight: 700;
+    min-width: 24px;
+    text-align: center;
+}
+
+.hero-powerstats .stat-controls {
+    display: flex;
+    gap: 4px;
+}
+
+.hero-powerstats button {
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-bg-tertiary);
+    color: var(--color-text);
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.hero-powerstats button:hover:not(:disabled) {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #0B141C;
+}
+
+.hero-powerstats button:active {
+    transform: scale(0.9);
+}
+
+.hero-powerstats button:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
 }

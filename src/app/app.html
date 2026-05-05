@@ -1,3 +1,5 @@
 <app-lista-heroe [heroes]="heroes"></app-lista-heroe>
-<app-nuevo-heroe (agregarNuevo)="agregarHeroe($event)"></app-nuevo-heroe>
+<div class="add-hero-section">
+        <app-nuevo-heroe (agregarNuevo)="agregarHeroe($event)"></app-nuevo-heroe>
+    </div>
 <router-outlet />

@@ -1,17 +1,21 @@
 <div [class]="esVillano() ? 'hero-item hero-villain' : 'hero-item'">
     <div class="image">
-        <img [src]="heroe().imagen" alt="heroe().nombre">
+        <img [src]="heroe().imagen" alt="{{ heroe().nombre }}">
+        <div class="tactical-tag">{{ getMainStat() }}</div>
     </div>
-    <div class="details">
-        <div class="hero-name">
-            {{ heroe().nombre }}
-        </div>
+    <div class="hero-name">
+        {{ heroe().nombre }}
     </div>
-     @for (poder of heroe().poderes | keyvalue; track poder.key) {
-        <div class="hero-powerstats">
-            <span>{{ poder.key | titlecase }}: {{ poder.value }}</span>
-            <button [disabled]="poder.value === 100" (click)="incrementaPoder(poder.key)">+</button>
-            <button [disabled]="poder.value === 0" (click)="decrementaPoder(poder.key)">-</button>
-        </div>
-    }
+    <div class="stats-container">
+        @for (poder of heroe().poderes | keyvalue; track poder.key) {
+            <div class="hero-powerstats">
+                <span class="stat-label">{{ poder.key | titlecase }}</span>
+                <div class="stat-controls">
+                    <button [disabled]="poder.value === 0" (click)="decrementaPoder(poder.key)">-</button>
+                    <span class="stat-value">{{ poder.value }}</span>
+                    <button [disabled]="poder.value === 100" (click)="incrementaPoder(poder.key)">+</button>
+                </div>
+            </div>
+        }
+    </div>
 </div>
