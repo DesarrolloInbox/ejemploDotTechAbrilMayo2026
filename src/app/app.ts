@@ -1,9 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ItemHeroe } from './componentes/item-heroe/item-heroe';
 import { ListaHeroe } from './componentes/lista-heroe/lista-heroe';
 import { NuevoHeroe } from "./componentes/nuevo-heroe/nuevo-heroe";
 import { Heroe } from './compartido/interfaces/heroe.interface';
+import { Heroeservicio } from './compartido/servicios/heroeservicio';
 
 @Component({
   selector: 'app-root',
@@ -12,41 +13,12 @@ import { Heroe } from './compartido/interfaces/heroe.interface';
   styleUrl: './app.css'
 })
 export class App {
+  readonly #heroeServicio = inject(Heroeservicio);
 
-  heroes: Heroe[] = [
-    {
-      id: 620,
-      nombre: 'Spider-Man',
-      poderes: {
-        velocidad: 95,
-        inteligencia: 5
-      },
-      imagen: '',
-      bando: 'bueno'
-    },
-    {
-      id: 620,
-      nombre: 'Batman',
-      poderes: {
-        velocidad: 85,
-        inteligencia: 15
-      },
-      imagen: '',
-      bando: 'malo'
-    },
-    {
-      id: 620,
-      nombre: 'Super-Man',
-      poderes: {
-        velocidad: 75,
-        inteligencia: 25
-      },
-      imagen: '',
-      bando: 'bueno'
-    }
-  ]
+  heroes = this.#heroeServicio.encontrarTodos();
 
-  agregarHeroe(heroe: Heroe) {
-    this.heroes.push(heroe);
+  addHeroe(heroe: Heroe) {
+    this.#heroeServicio.agregar(heroe);
   }
+  
 }

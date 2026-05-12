@@ -1,7 +1,8 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { Heroe } from '../../compartido/interfaces/heroe.interface';
 import { ItemHeroe } from "../item-heroe/item-heroe";
 import { HeroeCambioPoderes } from '../../compartido/interfaces/HeroeCambioPoderes';
+import { Heroeservicio } from '../../compartido/servicios/heroeservicio';
 
 @Component({
   selector: 'app-lista-heroe',
@@ -12,7 +13,10 @@ import { HeroeCambioPoderes } from '../../compartido/interfaces/HeroeCambioPoder
 export class ListaHeroe {
   heroes = input.required<Heroe[]>()
 
+  readonly #heroeServicio = inject(Heroeservicio);
+
   onCambioPoder({heroe, poder, valor}: HeroeCambioPoderes): void {
     heroe.poderes[poder] += valor;
+    this.#heroeServicio.actualizar(heroe, poder, valor);
   }
 }
